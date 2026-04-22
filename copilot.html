@@ -1,0 +1,95 @@
+<ul id="playlist">
+    <li data-src="../thine songeths/XNOR XNOR XNOR - Frums.mp3">XNOR XNOR XNOR - Frums</li>
+    <li data-src="../thine songeths/OH TENGO SUERTE - Masayoshi takanaka.mp3">OH! TENGO SUERTE - Masayoshi Takanaka</li>
+    <li data-src="../thine songeths/Devils Dance - Cortex.mp3">Devil's Dance - Cortex</li>
+</ul>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JamieFM</title>
+<style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    #player-container { max-width: 400px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    audio { width: 100%; margin-top: 10px; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; }
+    li.active { background: #007BFF; color: white; }
+    li:hover { background: #eee; }
+</style>
+</head>
+<body>
+
+<div id="player-container">
+    <h2>JamieFM</h2>
+    <audio id="audioPlayer" controls></audio>
+    <!-- Playlist mock data inserted here -->
+    <ul id="playlist">
+        <li data-src="../thine songeths/XNOR XNOR XNOR - Frums.mp3">XNOR XNOR XNOR - Frums</li>
+        <li data-src="../thine songeths/OH TENGO SUERTE - Masayoshi takanaka.mp3">OH! TENGO SUERTE - Masayoshi Takanaka</li>
+        <li data-src="../thine songeths/Devils Dance Cortex.mp3">Track 3 - SoundHelix</li>
+    </ul>
+</div>
+
+<script>
+(function() {
+    const audio = document.getElementById('audioPlayer');
+    const playlist = document.getElementById('playlist');
+    const tracks = playlist.getElementsByTagName('li');
+    let currentTrack = 0;
+    const songs = [
+    {
+        image: "song cover path?",
+        name: "XNOR XNOR XNOR",
+        artist: "Frums",
+        audio: "../thine songeths/XNOR XNOR XNOR - Frums.mp3"
+    },
+    {
+        image: "song cover path?",
+        name: "OH! TENGO SUERTE",
+        artist: "Masayoshi takanaka",
+        audio: "../thine songeths/OH TENGO SUERTE - Masayoshi takanaka.mp3"
+    },
+    {
+        image: "song cover path?",
+        name: "Devil's dance",
+        artist: "Cortex",
+        audio: "../thine songeths/Devils Dance - Cortex.mp3"
+    },
+];
+    // Load the selected track
+    function loadTrack(index) {
+        if (index < 0 || index >= tracks.length) return;
+        for (let i = 0; i < tracks.length; i++) {
+            tracks[i].classList.remove('active');
+        }
+        tracks[index].classList.add('active');
+        audio.src = tracks[index].getAttribute('data-src');
+        audio.play().catch(err => console.log("Autoplay blocked:", err));
+        currentTrack = index;
+    }
+
+    // Click event for playlist items
+    for (let i = 0; i < tracks.length; i++) {
+        tracks[i].addEventListener('click', () => {
+            loadTrack(i);
+        });
+    }
+
+    // Play next track automatically
+    audio.addEventListener('ended', () => {
+        let nextTrack = currentTrack + 1;
+        if (nextTrack >= tracks.length) nextTrack = 0; // loop back
+        loadTrack(nextTrack);
+    });
+
+    // Initialize first track
+    loadTrack(currentTrack);
+}());
+
+</script>
+
+</body>
+</html>
+
