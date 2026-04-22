@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, Helvetica, Sans-Serif;
+}
+
+#music-player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#song-image {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+}
+#song-name {
+    margin-top: 20px;
+    font-size: 2em;
+}
+#music-buttons {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+#music-buttons i {
+    padding: 10px;
+    color: blue;
+}
+
+#slider-song {
+    accent-color: red;
+    width: 300px;
+    height: 5px;
+    margin-top: 20px;
+}
